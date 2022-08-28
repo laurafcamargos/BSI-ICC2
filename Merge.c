@@ -2,13 +2,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-
 void merge(int a[], int n);
 void mergerecursivo(int a[], int inicio, int fim, int b[]);
 
 void merge(int a[], int n) // qntd de elementos do vetor
 {
-    int *b = (int*)malloc(n * sizeof(int));
+    int *b = (int *)malloc(n * sizeof(int));
     mergerecursivo(a, 0, n - 1, b); // indice do ultimo elemento, b eh o vetor auxiliar
     free(b);
 }
@@ -65,22 +64,22 @@ void printa_vetor(int *vetor, int n)
         printf("%d ", vetor[i]);
     }
 }
-int main() {
-  int n;
-  scanf("%d",&n);
-  int vetor[n];
-   srand(time(NULL));
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    int vetor[n];
+    srand(time(NULL));
 
-  for (int i = 0; i < n; i++)
-  {
-    vetor[i] = rand () % 100;
-  }
-  for (int i = 0; i < n; i++)
-  {
-    printf("%d ",vetor[i]);
-  }
-  printf("\n");
-  merge(vetor,n);
-  printa_vetor(vetor,n);
-  
+    for (int i = 0; i < n; i++)
+    {
+        vetor[i] = rand() % 100;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+    merge(vetor, n);
+    printa_vetor(vetor, n);
 }
