@@ -6,6 +6,7 @@ void bubble_sort(int *vetor, int n);
 void selection_sort(int *vetor, int max);
 int *ler_vetor(int *vetor, int n);
 void printa_vetor(int *vetor, int n);
+
 int *ler_vetor(int *vetor, int n)
 {
     for (int i = 0; i < n; i++)
@@ -82,7 +83,6 @@ int main()
     int tam, ret;
     char met[10];
     char sel[10] = "selecao";
-    char bol[5] = "bolha";
     scanf("%s", met);
     scanf("%d", &tam);
     int vetor[tam];
