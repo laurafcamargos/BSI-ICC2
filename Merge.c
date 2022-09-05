@@ -32,7 +32,7 @@ void mergerecursivo(int *a, int inicio, int fim, int b[])
         }
         else
         {
-            b[j = a[i2]];
+            b[j] = a[i2];
             i2++;
         }
         j++;
