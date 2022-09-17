@@ -109,7 +109,6 @@ void merge2(int a[], int c, int f, int b[]) {
         }
         j++;
     }
-
     // Junção dos elementos restantes do primeiro
     // vetor (se ele não tiver terminado):
     while (i1 <= m) {
