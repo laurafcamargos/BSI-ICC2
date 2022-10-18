@@ -20,3 +20,7 @@ void shell(int a[],int n) {
   }
   gap = gap / 2;
 }
+
+
+
+
