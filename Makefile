@@ -8,7 +8,7 @@ atividade06.o: atividade06.c
 	$(CC) -c atividade06.c
 	
 clean:
-	rm atividade06 *.o
+	rm main *.o
 
 run: main
 	./main

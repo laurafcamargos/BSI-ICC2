@@ -1,17 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int Shell(int *a, int n);
-int Quick(int *v, int f, int l);
+int contadorShell(int flag)
+{
+  static int count = 0;
 
-int Shell(int *v, int n) {
+  if (!flag)
+  {
+
+    ++count;
+    return 0;
+  }
+  else
+  {
+    int aux = count;
+    count = 0;
+    return aux;
+  }
+}
+
+int contadorQuick(int flag)
+{
+  static int count = 0;
+
+  if (!flag)
+  {
+
+    ++count;
+    return 0;
+  }
+  else
+  {
+    int aux = count;
+    count = 0;
+    return aux;
+  }
+}
+
+void Shell(int *v, int n)
+{
 
     int gap = 1;
-    int count = 0;
 
     while (gap <= n)
     {
-
         gap *= 2;
     }
 
@@ -19,43 +51,44 @@ int Shell(int *v, int n) {
 
     while (gap > 0)
     {
-
         for (int i = gap; i < n; i += gap)
         {
 
             int x = v[i];
-            count++;
             int j = i - gap;
+            contadorShell(0);
 
             while (j >= 0 && v[j] > x)
             {
-                count++;
                 v[j + gap] = v[j];
-                count++;
+                contadorShell(0);
                 j -= gap;
+                contadorShell(0);
             }
+            if (j >= 0)
+                contadorShell(0);
 
             v[j + gap] = x;
-            count++;
+            contadorShell(0);
         }
 
         gap /= 2;
     }
-    return count;
+    
 }
-int Quick(int *v, int f, int l) {
-    int count = 0;
 
+
+void Quick(int *v, int f, int l,int fim)
+{
     if (f >= l)
     {
-
-        return count;
+        return;
     }
 
     int m = (l + f) / 2;
 
     int pivot = v[m];
-    count++;
+    contadorQuick(0);
 
     int i = f;
 
@@ -66,15 +99,16 @@ int Quick(int *v, int f, int l) {
 
         while (v[i] < pivot)
         {
-            count++;
+            contadorQuick(0);
             i++;
         }
-
+        contadorQuick(0);
         while (v[j] > pivot)
         {
-            count++;
+            contadorQuick(0);
             j--;
         }
+        contadorQuick(0);
 
         if (i >= j)
         {
@@ -83,61 +117,73 @@ int Quick(int *v, int f, int l) {
         }
 
         int aux = v[i];
-        count++;
+        contadorQuick(0);
 
         v[i] = v[j];
-        count++;
+        contadorQuick(0);
+        
         v[j] = aux;
-        count++;
+        contadorQuick(0);
+        
         i++;
-
         j--;
     }
-    printf("%d",count);
-    Quick(v, f, j);
-    return count;
-    Quick(v, j + 1, l);
-    return count;
+    Quick(v, f, j,fim);
+    Quick(v, j + 1, l,fim);
 }
 
 int main()
 {
-  int N;
-  int *vetor;
-  int *vetor1;
-  int c1,c2;
-  scanf("%d", &N);
+    int N;
+    int *vetor;
+    int *vetor1;
+    int *vetoraux;
+    int c1, c2;
+    scanf("%d", &N);
 
-  vetor = (int *)malloc(N * sizeof(int));
-  for (int i = 0; i < N; i++) {
-    scanf("%d", &vetor[i]);
-  }
-  vetor1 = (int *)malloc(N * sizeof(int));
-  for (int i = 0; i < N; i++) {
-      vetor1[i]= vetor[i];
-  }
-  for (int i = 0; i < N; i++) {
-    c1 = Shell(vetor, N); 
-    c2 = Quick(vetor1,0, N- 1);
-    if (c1 == c2) {
-        printf("- ");
-    }
-    else if (c1 > c2)
+    vetor = (int *)malloc(N * sizeof(int));
+    vetor1 = (int *)malloc(N * sizeof(int));
+    vetoraux = (int *)malloc(N * sizeof(int));
+
+    for (int i = 0; i < N; i++)
     {
-        printf("Q ");
-    }else if (c1 < c2) {
-        printf("S ");
+        scanf("%d", &vetor[i]);
     }
-  }
-  printf("\n");
-    for (int i = 0; i < N; i++) {
-      printf("%d ",vetor[i]);
-  }
-  printf("\n");
-   for (int i = 0; i < N; i++) {
-      printf("%d ",vetor1[i]);
-  }
- free(vetor1);
- free(vetor);
-  return 0;
+    
+    for (int i = 0; i < N; i++)
+    {
+        vetor1[i] = vetor[i];
+        vetoraux[i] = vetor[i];
+    }
+
+    for (int i = 1; i <=N; i++)
+    {
+        for (int j = 0; j<N; j++)
+        {
+            vetor[j] = vetoraux[j];
+            vetor1[j] = vetoraux[j];
+        }
+
+        Shell(vetor, i);
+        Quick(vetor1, 0, i-1,i);
+        c1 = contadorShell(1);
+        c2 = contadorQuick(1);
+
+        if (c1 == c2)
+        {
+            printf("- ");
+        }
+        if (c1 > c2)
+        {
+            printf("Q ");
+        }
+        if (c1 < c2)
+        {
+            printf("S ");
+        }
+    }
+    free(vetoraux);
+    free(vetor1);
+    free(vetor);
+    return 0;
 }
