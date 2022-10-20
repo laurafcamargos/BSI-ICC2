@@ -45,6 +45,7 @@ void bubble_sort(int *vetor, int n)
         }
     }
 }
+
 void selection_sort(int *vetor, int n)
 {
     int i, j, menor, aux;
@@ -69,6 +70,7 @@ void selection_sort(int *vetor, int n)
         }
     }
 }
+
 void printa_vetor(int *vetor, int n)
 {
     int i;
