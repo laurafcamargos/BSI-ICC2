@@ -26,15 +26,21 @@ int busca_binaria(int a[], int n, int x)
 }
 
 int main() {
-    int n;
-    scanf("%d",&n);
-    int vetor[n];
-    for (int i = 0; i < n; i++)
+    int N,K;
+    scanf("%d",&N);
+    int vetor[N];
+    for (int i = 0; i < N; i++)
     {
         scanf("%d ",&vetor[i]);
     }
-    int x = 2;
-    int recebe = busca_binaria(vetor,n,x);
-    printf("%d",recebe);
+    scanf("%d",&K);
+    int aux[K];
+    for (int i = 0; i < K; i++)
+    {
+        scanf("%d",&aux[i]);
+        int recebe = busca_binaria(vetor,K,aux[i]);
+        printf("%d",recebe);
+    }
+    
     return 0; 
 }
