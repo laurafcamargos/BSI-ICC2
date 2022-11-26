@@ -1,11 +1,11 @@
 CC = gcc
 CFLAGS = -Wall
 	
-all: atividade06.o 
-	$(CC) -o main atividade06.o 
+all: edição.o 
+	$(CC) -o main edição.o 
 	
-atividade06.o: atividade06.c 
-	$(CC) -c atividade06.c
+edição.o: edição.c 
+	$(CC) -c edição.c
 	
 clean:
 	rm main *.o
