@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+//Júlio César Cabral - 13672922
+//Laura Fernandes Camargos - 13692334
+//Lucas Masaki Maeda - 13692272
+//Matheus Henrique da Silva - 13696658
 
 int amigos_max(int *cache,int linhas,int colunas,int **percurso,int quarteirao) {
 
@@ -11,15 +15,15 @@ int amigos_max(int *cache,int linhas,int colunas,int **percurso,int quarteirao) 
             max = 0; //maior caminho q o último nó pode ter
         }
         else {
-            if((quarteirao %colunas ) != (colunas - 1)) { //5%3 = 2, 2%3 = 2
+            if((quarteirao %colunas ) != (colunas - 1)) { //5%3 = 2, 2%3 = 2 coluna onde está o nó "beirada"
                 maxDireita = percurso[quarteirao][quarteirao+1] + amigos_max(cache, linhas, colunas, percurso,quarteirao+1);
-            }
+            } //esse nó beirada só percorre pra baixo
             if(quarteirao < ((linhas * colunas) - colunas)) {
                 maxBaixo = percurso[quarteirao][quarteirao+colunas] + amigos_max(cache,linhas, colunas, percurso,quarteirao+colunas);
-            }
+            } //demais nós 
 
             if(maxBaixo > maxDireita) 
-                max = maxBaixo;
+                max = maxBaixo; 
             else 
                 max = maxDireita;
         }
